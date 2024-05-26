@@ -1,5 +1,11 @@
+import { startTransition } from "react"
+
+
 // Action Types
 const LOAD_PRODUCTS = 'products/loadProducts'
+const LOAD_PRODUCT = 'products/loadProductDetails'
+// const ADD_PRODUCT = 'products/addProduct'
+// const DELETE_PRODUCT = 'products/deleteProduct'
 
 
 // Actions
@@ -7,6 +13,13 @@ const load = (products) => {
     return {
         type: LOAD_PRODUCTS,
         products
+    }
+}
+
+const loadProduct = (product) => {
+    return {
+        type: LOAD_PRODUCT,
+        product
     }
 }
 
@@ -22,6 +35,15 @@ export const thunkLoadProducts = () => async dispatch => {
 }
 
 
+export const thunkLoadProduct = (productId) => async dispatch => {
+    const response = await fetch(`/api/products/${productId}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(loadProduct(data))
+    }
+}
+
 // Reducer
 
 const initialState = {}
@@ -34,6 +56,11 @@ const productReducer = (state = initialState, action) => {
                 newState[product.id] = product
             });
             return newState
+        }
+        case LOAD_PRODUCT: {
+            return {
+                ...action.product
+            }
         }
         default:
             return state;

@@ -6,13 +6,11 @@ import ProductCard from "./ProductCard";
 
 function ProductList () {
     const dispatch = useDispatch()
-    // const [products, setProducts] = useState([]);
     const products = useSelector(state => Object.values(state.products) ? Object.values(state.products) : [])
-    console.log(products, 'line 10')
+
     useEffect(() => {
         dispatch(thunkLoadProducts())
     }, [dispatch])
-    // console.log(products, 'line15')
 
     if (!products) {
         <h2>Loading....</h2>
@@ -21,9 +19,9 @@ function ProductList () {
     return (
         <div>
             {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-                // <h2 key={product.id}>{product.description}</h2>
+                <ProductCard key={product?.id} product={product} />
             ))}
+
         </div>
     )
 }
