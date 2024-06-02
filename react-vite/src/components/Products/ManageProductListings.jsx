@@ -8,7 +8,7 @@ import UpdateProduct from './UpdateProduct'
 
 function ManageProductListings () {
     const dispatch = useDispatch()
-    const userId = useSelector(state => state.session.user.id)
+    const userId = useSelector(state => state.session.user?.id)
     const products = useSelector(state => state.products)
     const productsArr = Object.values(products).filter(product => product?.farmer_id === userId)
     const [isLoaded, setIsLoaded] = useState(false)

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from app.models import Product, User, db
 from flask_login import login_required, current_user
 from datetime import date, datetime
+
 product_routes = Blueprint('products', __name__)
 
 @product_routes.route('/')
