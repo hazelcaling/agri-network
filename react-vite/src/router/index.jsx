@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import { ProductDetails, ProductList, ManageProductListings, CreateProductForm } from '../components/Products';
 import HomePage from '../components/HomePage';
+import BuyerRequestList from '../components/Buyer/AllBuyerRequests';
+import { UserBuyerRequests, ManageBuyerRequests, BuyerRequestDetails } from '../components/Buyer';
 
 export const router = createBrowserRouter([
   {
@@ -11,19 +11,17 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />
-      },
-      {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
+        element: <HomePage />,
       },
       {
         path: 'products',
-        element: <ProductList />
+        element: <ProductList />,
+        // children: [
+        //   {
+        //     path: ':productId',
+        //     element: <ProductDetails />
+        //   },
+        // ]
       },
       {
         path: 'products/:productId',
@@ -36,6 +34,23 @@ export const router = createBrowserRouter([
       {
         path: 'user/products',
         element: <ManageProductListings />
+      },
+      {
+        path: 'buyer-requests',
+        element: <BuyerRequestList />
+      },
+      {
+        path: 'buyer-requests/:buyerReqId',
+        element: <BuyerRequestDetails />
+
+      },
+      {
+        path: 'user/buyer-requests',
+        element: <ManageBuyerRequests />
+      },
+      {
+        path: 'buyers/:buyerId/buyer-requests',
+        element: <UserBuyerRequests />
       }
     ],
   },

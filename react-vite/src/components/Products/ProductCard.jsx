@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import '../Buyer/BuyerRequestCard.css'
 
 function ProductCard ({ product }) {
     const formatDate = (dateString) => {
@@ -9,16 +10,20 @@ function ProductCard ({ product }) {
     }
 
     return (
-        <div className="product-card">
-            <Link to={`/products/${product?.id}`}>
-                <h2>{product?.product_type}</h2>
-                <p>{product?.description}</p>
-                <p>{product?.location}</p>
-                {product?.available_now ? `In Stock` :
-                // `Harvest Date : ${product.harvest_date ? new Date(product.harvest_date).toISOString().split('T')[0] : ''}`}
-                `Harvest Date: ${formatDate(product?.harvest_date)}`}
-                <p>Farmer: {product?.farmer}</p>
+        <div className="listing-container">
+        <div className="listing-card" >
+            <Link to={`${product?.id}`}>
+                <div className="details">
+                <h3>{product?.product_type}</h3>
+                <p><span className="label">Description: </span>{product?.description}</p>
+                <p><span className="label">Location:</span>{product?.location}</p>
+                <p><span className="label">Availability:</span>{product?.available_now ? `In Stock` :
+                `Harvest Date: ${formatDate(product?.harvest_date)}`}</p>
+
+                <p><span className="label">Farmer:</span>{product?.farmer}</p>
+                </div>
             </Link>
+        </div>
         </div>
     )
 }

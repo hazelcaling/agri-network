@@ -28,10 +28,15 @@ function LoginFormModal() {
     }
   };
 
-  const demoUser = () => {
+  const demoUserFarmer = () => {
     setEmail("demo@aa.io");
     setPassword("password");
   };
+
+  const demoUserBuyer = () => {
+    setEmail('bobbie@aa.io')
+    setPassword('password')
+  }
 
   return (
     <>
@@ -58,7 +63,8 @@ function LoginFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
-        <div><button onClick={demoUser}>Demo User</button></div>
+        <div><button onClick={demoUserFarmer}>Demo User Farmer</button></div>
+        <div><button onClick={demoUserBuyer}>Demo User Buyer</button></div>
       </form>
     </>
   );

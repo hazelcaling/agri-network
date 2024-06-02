@@ -32,7 +32,7 @@ function ProductList () {
             )}
             <div>
                 {isLoaded && productsArr.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                    <ProductCard key={product?.id} product={product} />
                 ))}
             </div>
         </>
