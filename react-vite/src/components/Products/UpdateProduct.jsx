@@ -82,7 +82,11 @@ function UpdateProduct({ productId }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="product-form" noValidate>
+        <div className="modal">
+            <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+            <h2>Edit Listing</h2>
+        <form onSubmit={handleSubmit} noValidate className='modal-form'>
             <input type="text" name="product_type" value={productData.product_type} onChange={handleChange} placeholder="Product Type" />
             {submitted && validationErrors.product_type && (<span className="errors">{validationErrors.product_type}</span>)}
             <input type="text" name="description" value={productData.description} onChange={handleChange} placeholder="Description" />
@@ -99,6 +103,8 @@ function UpdateProduct({ productId }) {
             (<input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange}/>)}
             <div><button>Submit</button></div>
         </form>
+        </div>
+        </div>
     )
 
 }

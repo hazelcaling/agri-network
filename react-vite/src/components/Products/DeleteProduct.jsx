@@ -14,11 +14,15 @@ function DeleteProduct({ productId }) {
     }
 
     return (
-        <div>
-            <h2>Confirm Delete</h2>
-            <p>Are you sure you want to delete this product?</p>
-            <button onClick={handleDelete}>Yes (Delete Product)</button>
-            <button onClick={closeModal}>No (Keep Product)</button>
+        <div className="modal">
+            <div className="modal-content">
+                <span className="close" onClick={closeModal}>&times;</span>
+                <div className="modal-header">Are you sure you want to delete this listing?</div>
+                <div className="modal-footer">
+                    <button onClick={handleDelete} className="modal-button yes">Yes</button>
+                    <button onClick={closeModal} className="modal-button no">No</button>
+                </div>
+            </div>
         </div>
     )
 }

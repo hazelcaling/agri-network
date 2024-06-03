@@ -4,6 +4,8 @@ import { thunkLoadProducts } from "../../redux/product";
 import ProductCard from "./ProductCard";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ProductForm from "./CreateProductForm";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+
 
 function ProductList () {
     const dispatch = useDispatch()
@@ -22,14 +24,7 @@ function ProductList () {
 
     return (
         <>
-            {isLoggedIn && (
-                <button>
-                    <OpenModalMenuItem
-                        itemText='Create NEW Product Listing'
-                        modalComponent={<ProductForm />}>
-                    </OpenModalMenuItem>
-                </button>
-            )}
+            <div className="create"><OpenModalButton buttonText='Create a new Listing' modalComponent={ !isLoggedIn ? <div className="modal-content"><OpenModalMenuItem itemText='Login is required to create listing'/></div>: <ProductForm />}  /></div>
             <div>
                 {isLoaded && productsArr.map((product) => (
                     <ProductCard key={product?.id} product={product} />

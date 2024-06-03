@@ -52,6 +52,7 @@
     flex-direction: column;
 }
 
+.modal-form input[type='date'],
 .modal-form select,
 .modal-form input[type='text'],
 .modal-form input[type='number'],
@@ -101,6 +102,11 @@ h2 {
     margin-bottom: 20px;
     padding: 15px;
 }
+
+.errors {
+    color: red;
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; }
