@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { thunkCreateProduct } from "../../redux/product";
 import { useModal } from "../../context/Modal";
+import productTypes from "../Buyer/productTypes";
 
 function CreateProductForm () {
     const dispatch = useDispatch();
@@ -27,15 +28,13 @@ function CreateProductForm () {
     }
 
     useEffect(() => {
-        const { product_type, description, location } = productData
+        const { description, location } = productData
         const errors = {}
 
-        if (!product_type) errors.product_type = 'Product Type is required'
         if (!description) errors.description = 'Description is required'
+        if (description && description.length < 5) errors.description = 'Description must be atleast 5 characters long'
         if (!location) errors.location = 'Location is required'
-        if (product_type.length < 5) errors.product_type = 'Product Type must be atleast 5 characters long'
-        if (description.length < 5) errors.description = 'Description must be atleast 5 characters long'
-        if (description.location < 5) errors.location = 'Location must be atleast 5 characters long'
+        if (location && location.length < 5) errors.location = 'Please provide a valid location'
         setValidationErrors(errors)
     }, [productData])
 
@@ -65,24 +64,32 @@ function CreateProductForm () {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="product-form" noValidate>
-            <input type="text" name="product_type" value={productData.product_type} onChange={handleChange} placeholder="Product Type" />
-            {submitted && validationErrors.product_type && (<span className="errors">{validationErrors.product_type}</span>)}
-            <input type="text" name="description" value={productData.description} onChange={handleChange} placeholder="Description" />
-            {submitted && validationErrors.description && (<span className="errors">{validationErrors.description}</span>)}
-            <input type="text" name="location" value={productData.location} onChange={handleChange} placeholder="Location"/>
-            {submitted && validationErrors.location && (<span className="errors">{validationErrors.location}</span>)}
-            <label htmlFor="available_now">In Stock:</label>
-            <select name="available_now" id="available_now" onChange={handleChange}>
-                <option value="">Please select if yes or no</option>
-                <option value='true'>Yes</option>
-                <option value='false'>No</option>
-            </select>
-            {productData.available_now === 'false' && (
-                <input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange}/>
-            )}
-            <div><button>Submit</button></div>
-        </form>
+        <div className="modal">
+            <div className="modal-content">
+                <span className="close" onClick={closeModal}>&times;</span>
+                <h2>Please provide Product Details</h2>
+                <form onSubmit={handleSubmit} className="modal-form">
+                    <select name="product_type" id="" value={productData.product_type} onChange={handleChange} required>
+                        <option value="">Select Product</option>
+                        {productTypes.map((type, index) => (
+                            <option value={type} key={index}>{type}</option>))}
+                    </select>
+                    {submitted && validationErrors.description && (<p className="errors">{validationErrors.description}</p>)}
+                    <input type="text" name="description" value={productData.description} onChange={handleChange} placeholder="Description" />
+                    {submitted && validationErrors.location && (<span className="errors">{validationErrors.location}</span>)}
+                    <input type="text" name="location" value={productData.location} onChange={handleChange} placeholder="Location"/>
+                    <select name="available_now" id="available_now" onChange={handleChange}>
+                        <option value="">In Stock?</option>
+                        <option value='true'>Yes</option>
+                        <option value='false'>No</option>
+                    </select>
+                    {productData.available_now === 'false' && (
+                    <input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange}/>
+                    )}
+                    <button className="submit">Submit Listing</button>
+                </form>
+            </div>
+        </div>
     )
 
 }

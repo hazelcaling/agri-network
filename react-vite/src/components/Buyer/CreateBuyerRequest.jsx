@@ -21,7 +21,6 @@ function CreateBuyerRequest() {
 
     useEffect(() => {
         const errors = {}
-        if (!product) errors.productType = 'Product Type is required'
         if (!description) errors.description = 'Description is required'
         if (description.length < 5) errors.description = 'Description must be atleast 5 characters'
         if (!offerPrice) errors.offerPrice = 'Offer price is required'

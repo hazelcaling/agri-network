@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteProduct from "./DeleteProduct";
 import UpdateProduct from './UpdateProduct'
+import CreateProductForm from "./CreateProductForm";
 
 function ManageProductListings () {
     const dispatch = useDispatch()
@@ -19,21 +20,25 @@ function ManageProductListings () {
     }, [dispatch])
 
     return (
-        <div>
+        <>
+            <div className="create"><OpenModalButton buttonText='Create a new listing' modalComponent={<CreateProductForm />}/></div>
             {isLoaded && (
                 productsArr.map((product) => (
                     <div key={product?.id}>
                         <ProductCard  product={product}/>
-                        <OpenModalButton
-                            buttonText='Edit'
-                            modalComponent={<UpdateProduct productId={product?.id} />}/>
-                        <OpenModalButton
-                            buttonText='Delete'
-                            modalComponent={<DeleteProduct productId={product?.id} />} />
+                        <div className="edit-delete-buttons">
+                            {/* <OpenModalButton
+                                buttonText='Edit'
+                                modalComponent={<UpdateProduct productId={product?.id} />}/> */}
+                                <OpenModalButton buttonText='Edit'/>
+                            <OpenModalButton
+                                buttonText='Delete'
+                                modalComponent={<DeleteProduct productId={product?.id} />} />
+                        </div>
                     </div>
                 ))
             )}
-        </div>
+        </>
     )
 }
 
