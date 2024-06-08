@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout';
-import { ProductDetails, ProductList, ManageProductListings, CreateProductForm } from '../components/Products';
+import { ProductDetails, ProductList, ManageProductListings, CreateProductForm, FarmerListings, UpdateProduct } from '../components/Products';
 import HomePage from '../components/HomePage';
 import BuyerRequestList from '../components/Buyer/AllBuyerRequests';
-import { UserBuyerRequests, ManageBuyerRequests, BuyerRequestDetails } from '../components/Buyer';
+import { UserBuyerRequests, ManageBuyerRequests, BuyerRequestDetails, EditBuyerRequest } from '../components/Buyer';
 
 export const router = createBrowserRouter([
   {
@@ -16,12 +16,6 @@ export const router = createBrowserRouter([
       {
         path: 'products',
         element: <ProductList />,
-        // children: [
-        //   {
-        //     path: ':productId',
-        //     element: <ProductDetails />
-        //   },
-        // ]
       },
       {
         path: 'products/:productId',
@@ -36,6 +30,21 @@ export const router = createBrowserRouter([
         element: <ManageProductListings />
       },
       {
+        path: 'user/products/:productId',
+        element: <ProductDetails />
+
+      },
+      {
+        path: 'user/products/:productId/edit',
+        element: <UpdateProduct />
+
+      },
+      {
+        path: 'farmers/:farmerId/products',
+        element: <FarmerListings />
+
+      },
+      {
         path: 'buyer-requests',
         element: <BuyerRequestList />
       },
@@ -47,6 +56,11 @@ export const router = createBrowserRouter([
       {
         path: 'user/buyer-requests',
         element: <ManageBuyerRequests />
+      },
+      {
+        path: 'user/buyer-requests/:listingId/edit',
+        element: <EditBuyerRequest />
+
       },
       {
         path: 'buyers/:buyerId/buyer-requests',

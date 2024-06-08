@@ -53,6 +53,7 @@ export const thunkLoadProducts = () => async dispatch => {
     if (response.ok) {
         const data = await response.json()
         dispatch(load(data));
+        return data
     }
 }
 
@@ -105,6 +106,16 @@ export const thunkEditProduct = (product) => async dispatch => {
         const updatedProduct = response.json()
         dispatch(editProduct(updatedProduct))
         return updatedProduct
+    }
+}
+
+export const thunkUserListings = (farmerId) => async dispatch => {
+    const response = await fetch(`/api/products/farmers/${farmerId}`)
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(load(data))
+        return data
     }
 }
 

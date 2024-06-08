@@ -10,7 +10,6 @@ function LoginFormModal() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
-  console.log('errors login', errors)
 
   const handleSubmit = async (e) => {
     e.preventDefault();

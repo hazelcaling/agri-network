@@ -73,3 +73,8 @@ def edit_product(id):
 
     db.session.commit()
     return jsonify(product.to_dict())
+
+@product_routes.route('/farmers/<int:farmer_id>')
+def get_listings_by_farmer(farmer_id):
+    data = db.session.query(Product).join(User).filter(User.id == farmer_id and Product.farmer_id == farmer_id and User.user_type == 'farmer').all()
+    return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}'} for product in data])

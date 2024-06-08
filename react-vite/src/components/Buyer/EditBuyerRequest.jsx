@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { thunkLoadBuyerReq } from "../../redux/buyer";
-import { useNavigate } from "react-router-dom";
+import { thunkLoadBuyerReq, thunkEditBuyerReq } from "../../redux/buyer";
+import { useNavigate, useParams } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import productTypes from './productTypes.js'
-import { thunkEditBuyerReq } from "../../redux/buyer";
 
-function EditBuyerRequest ({ buyerReqId }) {
+function EditBuyerRequest () {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const { listingId } = useParams()
     const { closeModal } = useModal()
     const [submitted, setSubmitted] = useState(false)
 
@@ -18,10 +18,9 @@ function EditBuyerRequest ({ buyerReqId }) {
         offerPrice: '',
         location: '',
     })
-    const [validationErrors, setValidationErrors] = useState({})
 
     useEffect(() => {
-        dispatch(thunkLoadBuyerReq(buyerReqId)).then(data => {
+        dispatch(thunkLoadBuyerReq(listingId)).then(data => {
             setListing({
                 product: data.product_type,
                 description: data.description,
@@ -31,7 +30,9 @@ function EditBuyerRequest ({ buyerReqId }) {
                 id: data.id
             })
         })
-    }, [dispatch, buyerReqId])
+    }, [dispatch, listingId])
+
+    const [validationErrors, setValidationErrors] = useState({})
 
      const handleChange = e => {
         const { name, value } = e.target
@@ -80,25 +81,31 @@ function EditBuyerRequest ({ buyerReqId }) {
 
     }
 
+    const close = () => {
+        reset()
+        closeModal()
+        navigate('/user/buyer-requests')
+    }
+
     return (
         <div className="modal">
             <div className="modal-content">
-                <span className="close" onClick={closeModal}>&times;</span>
+                <span className="close" onClick={close}>&times;</span>
                 <h2>Edit Listing</h2>
                 <form action="" onSubmit={handleSubmit} className="modal-form">
+                    {submitted && validationErrors.product && <span className="errors">{validationErrors.product}</span>}
                     <select name="product" id="" value={listing.product} onChange={handleChange}>
                         <option value="">Select Product</option>
                         {productTypes.map((type, index) => (
                             <option value={type} key={index}>{type}</option>
                         ))}
                     </select>
-                    {submitted && validationErrors.product && <span className="errors">{validationErrors.product}</span>}
-                    <textarea type="text" name='description' value={listing.description} onChange={handleChange} placeholder="Description" />
                     {submitted && validationErrors.description && <span className="errors">{validationErrors.description}</span>}
-                    <input type="number" name="offerPrice" value={listing.offerPrice} onChange={handleChange} placeholder="Offer Price" />
+                    <textarea type="text" name='description' value={listing.description} onChange={handleChange} placeholder="Description" />
                     {submitted && validationErrors.offerPrice && <span className="errors">{validationErrors.offerPrice}</span>}
-                    <input type="text" name="location" value={listing.location} onChange={handleChange} placeholder="Location" />
+                    <input type="number" name="offerPrice" value={listing.offerPrice} onChange={handleChange} placeholder="Offer Price" />
                     {submitted && validationErrors.location && <span className="errors">{validationErrors.location}</span>}
+                    <input type="text" name="location" value={listing.location} onChange={handleChange} placeholder="Location" />
                     <button>Edit Listing</button>
                 </form>
             </div>

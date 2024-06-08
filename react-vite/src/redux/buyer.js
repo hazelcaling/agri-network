@@ -49,6 +49,7 @@ const edit = updatedBuyerReq => {
 
 export const thunkLoadAllBuyerReq = () => async dispatch => {
     const response = await fetch('/api/buyer-requests');
+    console.log('response', response)
 
     if (response.ok) {
         const buyerRequests = await response.json()
