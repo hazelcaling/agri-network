@@ -14,7 +14,7 @@ function CreateProductForm () {
         product_type: '',
         description: '',
         location: '',
-        available_now: false,
+        available_now: '',
         harvest_date: ''
     }
 
@@ -35,6 +35,7 @@ function CreateProductForm () {
         if (description && description.length < 5) errors.description = 'Description must be atleast 5 characters long'
         if (!location) errors.location = 'Location is required'
         if (location && location.length < 5) errors.location = 'Please provide a valid location'
+
         setValidationErrors(errors)
     }, [productData])
 
@@ -63,6 +64,16 @@ function CreateProductForm () {
         return createdProduct
     }
 
+    const getTom = () => {
+        const today = new Date()
+        const tomorrow = new Date(today)
+        tomorrow.setDate(today.getDate() + 1)
+        return tomorrow.toISOString().split('T')[0]
+    }
+
+    const tom = getTom()
+
+
     return (
         <div className="modal">
             <div className="modal-content">
@@ -78,13 +89,14 @@ function CreateProductForm () {
                     <input type="text" name="description" value={productData.description} onChange={handleChange} placeholder="Description" />
                     {submitted && validationErrors.location && (<span className="errors">{validationErrors.location}</span>)}
                     <input type="text" name="location" value={productData.location} onChange={handleChange} placeholder="Location"/>
-                    <select name="available_now" id="available_now" onChange={handleChange}>
+                    {submitted && validationErrors.available_now && (<span className="errors">{validationErrors.available_now}</span>)}
+                    <select name="available_now" value={productData.available_now} id="" onChange={handleChange} required>
                         <option value="">In Stock?</option>
                         <option value='true'>Yes</option>
                         <option value='false'>No</option>
                     </select>
                     {productData.available_now === 'false' && (
-                    <input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange}/>
+                    <input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange} required={productData.available_now === 'false'} min={tom}/>
                     )}
                     <button className="submit">Submit Listing</button>
                 </form>

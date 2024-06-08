@@ -20,7 +20,7 @@ def get_listings_by_buyer(buyer_id):
     return jsonify([{**buyer_req.to_dict(), 'buyer': f'{buyer_req.buyer.first_name} {buyer_req.buyer.last_name}'} for buyer_req in data])
 
 
-@buyer_request_routes.route('/<int:id>')
+@buyer_request_routes.route('<int:id>')
 def get_buyer_request(id):
     """
     Get Buyer Request details by buyerReqId

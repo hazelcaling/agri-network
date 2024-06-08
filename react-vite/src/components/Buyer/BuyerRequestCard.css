@@ -80,7 +80,7 @@
 
 @media (max-width: 992px) {
     .listing-card {
-        width: calc(50% -20px);
+        width: calc(50% - 20px);
     }
 }
 

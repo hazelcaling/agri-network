@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { thunkLoadBuyerReq } from "../../redux/buyer";
-import { Link } from "react-router-dom";
 
 function BuyerRequestDetails() {
     const dispatch = useDispatch()
@@ -16,12 +15,12 @@ function BuyerRequestDetails() {
     }, [dispatch, buyerReqId])
 
     return (
-        <div>
-            <h2>{listing.product_type}</h2>
+        <div className="listing">
+            <h2 className="title">{listing.product_type}</h2>
             <p>Description: {listing.description}</p>
             <p>Price: {listing.offer_price} per kg</p>
             <p>Location: {listing.location}</p>
-            <p>Buyer: <Link to={`/buyers/${listing.buyer_id}/buyer-requests`}>{listing.buyer}</Link></p>
+            <p>Buyer: {listing.buyer}</p>
         </div>
     )
 }

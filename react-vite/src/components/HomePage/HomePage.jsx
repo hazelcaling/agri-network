@@ -2,6 +2,10 @@ import { Link } from "react-router-dom"
 import './HomePage.css'
 
 function HomePage () {
+
+    const handleClick = () => {
+        return alert('Feature coming soon')
+    }
     return (
         <div className="homepage-container">
             <div className="hero">
@@ -9,12 +13,11 @@ function HomePage () {
               <p>
                 Our network makes it easy for farmer and buyers to connect and trade.
                 Through our innovative technology and user-friendly interfaces, providing platform for farmers to showcase their products, buyers to access quality goods, and inventors to support agricultural ventures.
-
               </p>
               <div className="hero-buttons">
                     <button className="browse-button"><Link to='/products'>Browse Listings from Farmers</Link></button>
                     <button className="browse-button"><Link to='/buyer-requests' >Browse Buyer Inquiries</Link></button>
-                    <button className="browse-button"><Link>Invest in Farmers</Link></button>
+                    <button className="browse-button" onClick={handleClick}><Link>Invest in Farmers</Link></button>
                 </div>
             </div>
             <div className="image-section">
