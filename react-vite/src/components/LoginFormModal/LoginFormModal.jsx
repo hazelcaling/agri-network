@@ -28,33 +28,48 @@ function LoginFormModal() {
     }
   };
 
+  const demoUserFarmer = () => {
+    setEmail("demo@aa.io");
+    setPassword("password");
+  };
+
+  const demoUserBuyer = () => {
+    setEmail('bobbie@aa.io')
+    setPassword('password')
+  }
+
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
+    <div className="modal-auth">
+      <div className="modal-content-auth">
+        <span className="close" onClick={closeModal}>&times;</span>
+      <h2 className="header-auth">Log In</h2>
+      <form onSubmit={handleSubmit} id="auth-form">
+        <div className="form-group-auth">
+        {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+        <input
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="Enter your email"
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
+        </div>
+        <div className="form-group-auth">
+        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+        <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            placeholder="Password"
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        </div>
+        <button type="submit" className="btn login">Log In</button>
+        <button onClick={demoUserFarmer} className="btn farmer-buyer">Demo User Farmer</button>
+        <button onClick={demoUserBuyer} className="btn farmer-buyer">Demo User Buyer</button>
       </form>
-    </>
+      </div>
+    </div>
   );
 }
 
