@@ -37,5 +37,5 @@ class User(db.Model, UserMixin):
         }
 
     # Relationships
-    products = db.relationship('Product', back_populates='farmer')
-    buyer_requests = db.relationship('Buyer_Request', back_populates='buyer')
+    products = db.relationship('Product', back_populates='farmer', cascade='all, delete-orphan')
+    buyer_requests = db.relationship('Buyer_Request', back_populates='buyer', cascade='all, delete-orphan')
