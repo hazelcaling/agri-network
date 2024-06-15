@@ -9,12 +9,12 @@ def seed_products():
         farmer_id=users[0].id, product_type='Onion', description='Red Onion', location='Nueva Ecija', available_now=True)
     onion2 = Product(
         farmer_id=users[0].id, product_type='Onion', description='Native Onion', location='Nueva Ecija', harvest_date=datetime.strptime('10/24/2024', '%m/%d/%Y').date(), available_now=False)
-    eggplant = Product(
-        farmer_id=users[1].id, product_type='Eggplant', description='A large glossy, dark purple eggplant with a rich flavor', location='Tarlac', harvest_date=datetime.strptime('08/01/2024', '%m/%d/%Y').date(), available_now=False)
+    apple = Product(
+        farmer_id=users[1].id, product_type='Apple', description='Honeycrisp Organic', location='Tarlac', harvest_date=datetime.strptime('08/01/2024', '%m/%d/%Y').date(), available_now=False)
 
     db.session.add(onion1)
     db.session.add(onion2)
-    db.session.add(eggplant)
+    db.session.add(apple)
     db.session.commit()
 
 
