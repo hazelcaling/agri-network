@@ -6,13 +6,13 @@ from sqlalchemy.sql import text
 def seed_buyer_requests():
     users = db.session.query(User).filter(User.user_type == 'buyer').all()
     onion1 = Buyer_Request(
-        buyer_id=users[0].id, product_type='Onion', description='Need 20 kgs of red onions. Looking for medium-sized, fresh onions, preferably organic.', location='Nueva Ecija', offer_price=95)
+        buyer_id=users[0].id, product_type='Onion', description='Need 20 kgs of red onions organic.', location='Nueva Ecija', offer_price=95)
     watermelon = Buyer_Request(
-        buyer_id=users[0].id, product_type='Watermelon', description='Looking to buy 100 kgs of seedless watermelons. Preferably organic.', location='Nueva Ecija', offer_price=40)
+        buyer_id=users[0].id, product_type='Watermelon', description='Looking to buy 100 kgs of seedless watermelons organic', location='Nueva Ecija', offer_price=40)
     onion2 = Buyer_Request(
-        buyer_id=users[1].id, product_type='Onion', description='Need 30 kgs of red onions. Looking for medium-sized, fresh onions, preferably organic.', location='Manila', offer_price=100)
+        buyer_id=users[1].id, product_type='Onion', description='Need 30 kgs of red onions', location='Manila', offer_price=100)
     corn = Buyer_Request(
-        buyer_id=users[1].id, product_type='Corn', description='Looking to buy 200 kgs of sweet corn. Must be fresh and preferably non-GMO.', location='Manila', offer_price=50)
+        buyer_id=users[1].id, product_type='Corn', description='Looking to buy 200 kgs of sweet corn', location='Manila', offer_price=50)
 
     db.session.add(onion1)
     db.session.add(watermelon)
