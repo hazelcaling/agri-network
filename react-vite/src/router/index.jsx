@@ -1,9 +1,22 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Layout from './Layout';
-import { ProductDetails, ProductList, ManageProductListings, CreateProductForm, FarmerListings, UpdateProduct } from '../components/Products';
-import HomePage from '../components/HomePage';
-import BuyerRequestList from '../components/Buyer/AllBuyerRequests';
-import { UserBuyerRequests, ManageBuyerRequests, BuyerRequestDetails, EditBuyerRequest } from '../components/Buyer';
+import { createBrowserRouter } from "react-router-dom"
+import Layout from "./Layout"
+import {
+  ProductDetails,
+  ProductList,
+  ManageProductListings,
+  CreateProductForm,
+  FarmerListings,
+  UpdateProduct,
+} from "../components/Products"
+import HomePage from "../components/HomePage"
+import BuyerRequestList from "../components/Buyer/AllBuyerRequests"
+import {
+  UserBuyerRequests,
+  ManageBuyerRequests,
+  BuyerRequestDetails,
+  EditBuyerRequest,
+} from "../components/Buyer"
+import AboutMe from "../components/AboutMe/AboutMe"
 
 export const router = createBrowserRouter([
   {
@@ -14,58 +27,57 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'products',
+        path: "/aboutme",
+        element: <AboutMe />,
+      },
+      {
+        path: "products",
         element: <ProductList />,
       },
       {
-        path: 'products/:productId',
-        element: <ProductDetails />
+        path: "products/:productId",
+        element: <ProductDetails />,
       },
       {
-        path: 'products/create',
-        element: <CreateProductForm />
+        path: "products/create",
+        element: <CreateProductForm />,
       },
       {
-        path: 'user/products',
-        element: <ManageProductListings />
+        path: "user/products",
+        element: <ManageProductListings />,
       },
       {
-        path: 'user/products/:productId',
-        element: <ProductDetails />
-
+        path: "user/products/:productId",
+        element: <ProductDetails />,
       },
       {
-        path: 'user/products/:productId/edit',
-        element: <UpdateProduct />
-
+        path: "user/products/:productId/edit",
+        element: <UpdateProduct />,
       },
       {
-        path: 'farmers/:farmerId/products',
-        element: <FarmerListings />
-
+        path: "farmers/:farmerId/products",
+        element: <FarmerListings />,
       },
       {
-        path: 'buyer-requests',
-        element: <BuyerRequestList />
+        path: "buyer-requests",
+        element: <BuyerRequestList />,
       },
       {
-        path: 'buyer-requests/:buyerReqId',
-        element: <BuyerRequestDetails />
-
+        path: "buyer-requests/:buyerReqId",
+        element: <BuyerRequestDetails />,
       },
       {
-        path: 'user/buyer-requests',
-        element: <ManageBuyerRequests />
+        path: "user/buyer-requests",
+        element: <ManageBuyerRequests />,
       },
       {
-        path: 'user/buyer-requests/:listingId/edit',
-        element: <EditBuyerRequest />
-
+        path: "user/buyer-requests/:listingId/edit",
+        element: <EditBuyerRequest />,
       },
       {
-        path: 'buyers/:buyerId/buyer-requests',
-        element: <UserBuyerRequests />
-      }
+        path: "buyers/:buyerId/buyer-requests",
+        element: <UserBuyerRequests />,
+      },
     ],
   },
-]);
+])
