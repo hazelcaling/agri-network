@@ -9,23 +9,24 @@ def seed_buyer_requests():
         buyer_id=users[0].id, product_type='Onion', description='Need 20 kgs of red onions. Looking for medium-sized, preferably organic.', location='Nueva Ecija', offer_price=35)
     corn = Buyer_Request(
         buyer_id=users[1].id, product_type='Corn', description='Looking to buy 200 kgs of sweet corn. Must be fresh and preferably non-GMO.', location='Tarlac', offer_price=50)
+    tomato = Buyer_Request(
+        buyer_id=users[1].id, product_type='Tomato', description='Looking to buy 50 kgs of tomato', location='Tarlac', offer_price=90)
     talong = Buyer_Request(
         buyer_id=users[2].id, product_type='Eggplant', description='Looking to buy 400 kgs of eggplant', location='Manila', offer_price=200)
+    okra = Buyer_Request(
+        buyer_id=users[2].id, product_type='Okra', description='Looking to buy 100 kgs of okra', location='Manila', offer_price=150)
     garlic = Buyer_Request(
         buyer_id=users[3].id, product_type='Garlic', description='Looking to buy 600 kgs of garlic', location='Cavite', offer_price=300)
     mango = Buyer_Request(
         buyer_id=users[3].id, product_type='Mango', description='Looking to buy 100 kgs of mango', location='Cavite', offer_price=100)
-    okra = Buyer_Request(
-        buyer_id=users[2].id, product_type='Okra', description='Looking to buy 100 kgs of okra', location='Manila', offer_price=150)
-    tomato = Buyer_Request(
-        buyer_id=users[1].id, product_type='Tomato', description='Looking to buy 50 kgs of tomato', location='Tarlac', offer_price=90)
+
     db.session.add(onion)
     db.session.add(corn)
+    db.session.add(tomato)
     db.session.add(talong)
+    db.session.add(okra)
     db.session.add(garlic)
     db.session.add(mango)
-    db.session.add(okra)
-    db.session.add(tomato)
     db.session.commit()
 
 
