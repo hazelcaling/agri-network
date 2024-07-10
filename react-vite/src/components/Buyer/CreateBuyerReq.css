@@ -81,7 +81,7 @@ textarea:focus {
     min-height: 100px;
 }
 
-.modal-form button {
+.submit {
     background-color: #4CAF50;
     color: white;
     font-weight: bolder;
@@ -93,7 +93,7 @@ textarea:focus {
     margin-top: 10px;
 }
 
-.modal-form button:hover {
+.submit:hover {
     background-color: #45a049;
 }
 

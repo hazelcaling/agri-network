@@ -78,7 +78,7 @@ function CreateBuyerRequest() {
                     {submitted && validationErrors.offerPrice && <span className="errors">{validationErrors.offerPrice}</span>}
                     <input type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
                     {submitted && validationErrors.location && <span className="errors">{validationErrors.location}</span>}
-                    <button>Submit Requirement</button>
+                    <button className="submit">Submit Requirement</button>
                 </form>
             </div>
         </div>

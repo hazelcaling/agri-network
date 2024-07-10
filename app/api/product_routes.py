@@ -3,6 +3,7 @@ from app.models import Product, User, db, Image
 from flask_login import login_required, current_user
 from datetime import date, datetime
 from app.api.aws_helper  import get_unique_filename, upload_file_to_s3
+import os
 
 product_routes = Blueprint('products', __name__)
 
@@ -102,3 +103,17 @@ def edit_product(id):
 def get_listings_by_farmer(farmer_id):
     data = db.session.query(Product).join(User).filter(User.id == farmer_id and Product.farmer_id == farmer_id and User.user_type == 'farmer').all()
     return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}'} for product in data])
+
+
+@product_routes.route('/<int:product_id>/images', methods=['GET'])
+def get_images_by_product(product_id):
+    """
+    Fetches all images for a specific farmer listing.
+    """
+    product = Product.query.get(product_id)
+    if not product:
+        return jsonify({'message': 'Listing could not be found'}), 404
+
+    images = Image.query.filter(Image.product_id == product_id).all()
+
+    return jsonify([image.to_dict() for image in images]), 200
