@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import productTypes from "../Buyer/productTypes";
 import { thunkUploadImage } from "../../redux/image";
 import '../Images/UploadImage.css'
+import { LoadingSpinner } from "../LoadingSpinner";
 
 function CreateProductForm () {
     const dispatch = useDispatch();
@@ -94,6 +95,8 @@ function CreateProductForm () {
         }
     }
 
+    const tom = getTom()
+
     const getTom = () => {
         const today = new Date()
         const tomorrow = new Date(today)
@@ -101,7 +104,7 @@ function CreateProductForm () {
         return tomorrow.toISOString().split('T')[0]
     }
 
-    const tom = getTom()
+
 
     return (
         <div className="modal">
@@ -132,7 +135,7 @@ function CreateProductForm () {
                             <p className="optional">(Optional)</p>
                             <form encType="multipart/form-data">
                                 <label htmlFor="upload" className="custom-file-upload">
-                                    Add Photo
+                                    <span>Add Photo</span>
                                     <input
                                         id="upload"
                                         type="file"
@@ -140,7 +143,7 @@ function CreateProductForm () {
                                         onChange={handleFileChange}
                                     />
                                 </label>
-                                <span className="file-name">{fileName}</span>
+                                <p className="file-name">{fileName}</p>
                             </form>
                         </div>
                     </div>

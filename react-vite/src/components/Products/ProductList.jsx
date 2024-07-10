@@ -4,6 +4,7 @@ import { thunkLoadProducts } from "../../redux/product";
 import ProductCard from "./ProductCard";
 import ProductForm from "./CreateProductForm";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 
 function ProductList () {
@@ -18,8 +19,14 @@ function ProductList () {
         dispatch(thunkLoadProducts()).then(() => setIsloaded(true))
     }, [dispatch])
 
-    if (products.length === 0) {
-        <h2>Loading....</h2>
+    // if (products.length === 0) {
+    //     <h2>Loading....</h2>
+    // }
+
+    const hello = true
+
+    if (hello) {
+        return <LoadingSpinner />
     }
 
     return (
