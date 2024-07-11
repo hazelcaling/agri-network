@@ -95,7 +95,7 @@ function CreateProductForm () {
         }
     }
 
-    const tom = getTom()
+
 
     const getTom = () => {
         const today = new Date()
@@ -103,6 +103,8 @@ function CreateProductForm () {
         tomorrow.setDate(today.getDate() + 1)
         return tomorrow.toISOString().split('T')[0]
     }
+
+    const tom = getTom()
 
 
 

@@ -9,17 +9,6 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import { SearchBar } from "../SearchFilterSort";
 
 
-function ProductList() {
-  const dispatch = useDispatch()
-  const products = useSelector((state) => state.products)
-  const productsArr = Object.values(products)
-  const [isLoaded, setIsloaded] = useState(false)
-  const isLoggedIn = useSelector((state) => state.session.user !== null)
-  const isFarmer = useSelector(
-    (state) => state.session.user?.user_type === "farmer"
-  )
-
-
 function ProductList () {
     const dispatch = useDispatch()
     const products = useSelector(state => state.products)
@@ -29,9 +18,10 @@ function ProductList () {
     const isFarmer = useSelector(state => state.session.user?.user_type === 'farmer')
     const [noResults, setNoResults] = useState(false)
 
-
-  if (products.length === 0) <h2>Loading....</h2>
-
+    useEffect(() => {
+        dispatch(thunkLoadProducts())
+        setIsloaded(true)
+    }, [dispatch])
 
     useEffect(() => {
         if (productsArr.length === 0 && isLoaded) {
@@ -47,7 +37,6 @@ function ProductList () {
 
     return (
         <>
-
             {!isLoggedIn ?
                 (<div className='create'>
                     <OpenModalButton buttonText='Create a new Listing' modalComponent='Login is required to create listing'/>
@@ -58,7 +47,6 @@ function ProductList () {
             {noResults ? 'No Result' : productsArr.map((product) => (
                     <ProductCard key={product?.id} product={product} />
                 ))}
-
         </>
     )
 
