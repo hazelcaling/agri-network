@@ -5,6 +5,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_buyer_requests():
     users = db.session.query(User).filter(User.user_type == 'buyer').all()
+
     onion = Buyer_Request(
         buyer_id=users[0].id, product_type='Onion', description='Need 20 kgs of red onions. Looking for medium-sized, preferably organic.', location='Nueva Ecija', offer_price=35)
     corn = Buyer_Request(
@@ -19,6 +20,7 @@ def seed_buyer_requests():
         buyer_id=users[3].id, product_type='Garlic', description='Looking to buy 600 kgs of garlic', location='Cavite', offer_price=300)
     mango = Buyer_Request(
         buyer_id=users[3].id, product_type='Mango', description='Looking to buy 100 kgs of mango', location='Cavite', offer_price=100)
+
 
     db.session.add(onion)
     db.session.add(corn)

@@ -12,6 +12,7 @@ def seed_products():
     cabbage = Product(
         farmer_id=users[0].id, product_type='Cabbage', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('09/10/2024', '%m/%d/%Y').date(), available_now=False)
     onion2 = Product(
+
         farmer_id=users[1].id, product_type='Onion', description='Available 2 tons 25 per kilo. San Jose City Nueva Ecija. If interested tawag lang po kayo sa number na 0963-222-4444', location='Nueva Ecija', available_now=True)
     pakwan = Product(
         farmer_id=users[1].id, product_type='Watermelon', description='Pickup only', location='Nueva Ecija', harvest_date=datetime.strptime('08/20/2024', '%m/%d/%Y').date(), available_now=False)
@@ -24,15 +25,18 @@ def seed_products():
     pinya = Product(
         farmer_id=users[3].id, product_type='Pineapple', description='Pinya sweet and juicy available for delivery in Tarlac/Pampanga only.', location='Tarlac', available_now=True)
 
+
     db.session.add(onion)
     db.session.add(strawberry)
     db.session.add(cabbage)
     db.session.add(onion2)
+
     db.session.add(pakwan)
     db.session.add(eggplant)
     db.session.add(tomato)
     db.session.add(sili)
     db.session.add(pinya)
+
     db.session.commit()
 
 
