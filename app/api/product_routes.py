@@ -1,7 +1,10 @@
 from flask import Blueprint, jsonify, request
-from app.models import Product, User, db
+from app.models import Product, User, db, Image
 from flask_login import login_required, current_user
 from datetime import date, datetime
+from app.api.aws_helper  import get_unique_filename, upload_file_to_s3
+import os
+from sqlalchemy import or_
 
 product_routes = Blueprint('products', __name__)
 
@@ -15,6 +18,29 @@ def get_all_products():
 def get_product(product_id):
     data = db.session.query(Product).join(User).filter(Product.id == product_id and User.id == Product.farmer_id).all()
     return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}'} for product in data][0])
+
+
+# # (AWS S3) Upload an image for a business based on the business' id
+@product_routes.route('/<int:product_id>/images/upload', methods=['POST'])
+@login_required
+def upload_image(product_id):
+    image = request.files["image"]
+
+    if image:
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print('upload', upload)
+
+        if "url" not in upload:
+            return jsonify({"error": upload}), 400
+
+        url = upload["url"]
+        new_image = Image(farmer_id=current_user.id, product_id=product_id, url=url)
+        db.session.add(new_image)
+        db.session.commit()
+        return jsonify({"message": "Image uploaded successfully", "url": url}), 200
+
+    return jsonify({"error": "Unexpected error occurred"}), 500
 
 
 @product_routes.route('/', methods=['POST'])
@@ -78,3 +104,38 @@ def edit_product(id):
 def get_listings_by_farmer(farmer_id):
     data = db.session.query(Product).join(User).filter(User.id == farmer_id and Product.farmer_id == farmer_id and User.user_type == 'farmer').all()
     return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}'} for product in data])
+
+
+@product_routes.route('/<int:product_id>/images', methods=['GET'])
+def get_images_by_product(product_id):
+    """
+    Fetches all images for a specific farmer listing.
+    """
+    product = Product.query.get(product_id)
+    if not product:
+        return jsonify({'message': 'Listing could not be found'}), 404
+
+    images = Image.query.filter(Image.product_id == product_id).all()
+
+    return jsonify([image.to_dict() for image in images]), 200
+
+
+## Search products
+@product_routes.route('/search')
+def search_products():
+    """
+    Search product by product type, description
+    """
+    product = request.args.get('product_type', type=str)
+    description = request.args.get('description', type=str)
+
+    # Check if both product and description are not provided
+    if not product and not description:
+        results = db.session.query(Product).join(User).filter(User.user_type == 'farmer').all()  # Fetch all products
+    else:
+        # Perform search based on provided parameters
+        results = Product.query.filter(
+            or_(Product.product_type.ilike(f"%{product}%"), Product.description.ilike(f"%{description}%"))
+        ).all()
+
+    return jsonify([product.to_dict() for product in results]), 200

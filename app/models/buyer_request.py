@@ -29,3 +29,4 @@ class Buyer_Request(db.Model):
         }
     # Relationships
     buyer = db.relationship('User', back_populates='buyer_requests')
+    images = db.relationship('Image', back_populates='buyer_listing')

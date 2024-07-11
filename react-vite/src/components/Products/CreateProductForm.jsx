@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { thunkCreateProduct } from "../../redux/product";
 import { useModal } from "../../context/Modal";
+import { useNavigate } from "react-router-dom";
 import productTypes from "../Buyer/productTypes";
+import { thunkUploadImage } from "../../redux/image";
+import '../Images/UploadImage.css'
+import { LoadingSpinner } from "../LoadingSpinner";
 
 function CreateProductForm () {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const { closeModal } = useModal();
+    const navigate = useNavigate();
 
     const initialVal = {
         product_type: '',
@@ -19,8 +22,20 @@ function CreateProductForm () {
     }
 
     const [submitted, setSubmitted] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [productData, setProductData] = useState({ ...initialVal })
     const [validationErrors, setValidationErrors] = useState({})
+
+    const [image, setImage] = useState(null);
+    const [fileName, setFileName] = useState('No file chosen')
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            setImage(file);
+            setFileName(file.name)
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -43,9 +58,9 @@ function CreateProductForm () {
         setProductData({ ...initialVal })
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const handleSubmit = async () => {
         setSubmitted(true)
+        setLoading(true)
 
         if (Object.values(validationErrors).length > 0) return
 
@@ -57,12 +72,30 @@ function CreateProductForm () {
         const createdProduct = await dispatch(thunkCreateProduct(product))
 
         if (createdProduct) {
-            closeModal();
-            navigate(`/products/${createdProduct.id}`)
-            reset()
+            if (image) {
+                const formData = new FormData();
+                formData.append("image", image);
+                // aws uploads can be a bit slow—displaying
+                // some sort of loading message is a good idea
+                const newImage = await dispatch(thunkUploadImage(createdProduct.id, formData))
+                if (newImage) {
+                    setLoading(false)
+                    closeModal()
+                    navigate(`/products/${createdProduct.id}`)
+                    reset()
+                    return createdProduct
+                }
+            } else {
+                setLoading(false)
+                closeModal()
+                navigate(`/products/${createdProduct.id}`)
+                reset()
+                return createdProduct
+            }
         }
-        return createdProduct
     }
+
+    const tom = getTom()
 
     const getTom = () => {
         const today = new Date()
@@ -71,7 +104,6 @@ function CreateProductForm () {
         return tomorrow.toISOString().split('T')[0]
     }
 
-    const tom = getTom()
 
 
     return (
@@ -79,7 +111,7 @@ function CreateProductForm () {
             <div className="modal-content">
                 <span className="close" onClick={closeModal}>&times;</span>
                 <h2>Please provide Product Details</h2>
-                <form onSubmit={handleSubmit} className="modal-form">
+                <div className="modal-form">
                     <select name="product_type" id="" value={productData.product_type} onChange={handleChange} required>
                         <option value="">Select Product</option>
                         {productTypes.map((type, index) => (
@@ -98,8 +130,25 @@ function CreateProductForm () {
                     {productData.available_now === 'false' && (
                     <input type="date" name='harvest_date' value={productData.harvest_date} onChange={handleChange} required={productData.available_now === 'false'} min={tom}/>
                     )}
-                    <button className="submit">Submit Listing</button>
-                </form>
+                    <div className="upload-image-container">
+                        <div className="upload-form">
+                            <p className="optional">(Optional)</p>
+                            <form encType="multipart/form-data">
+                                <label htmlFor="upload" className="custom-file-upload">
+                                    <span>Add Photo</span>
+                                    <input
+                                        id="upload"
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
+                                    />
+                                </label>
+                                <p className="file-name">{fileName}</p>
+                            </form>
+                        </div>
+                    </div>
+                    <button className="submit" onClick={handleSubmit}>Submit Listing</button>
+                </div>
             </div>
         </div>
     )

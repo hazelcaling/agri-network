@@ -31,3 +31,4 @@ class Product(db.Model):
 
     # Relationships
     farmer = db.relationship('User', back_populates='products')
+    images = db.relationship('Image', back_populates='product')
