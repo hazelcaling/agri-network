@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import ProductForm from "./CreateProductForm";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { SearchBar } from "../SearchFilterSort";
 
 
 function ProductList () {
@@ -14,18 +15,21 @@ function ProductList () {
     const [isLoaded, setIsloaded] = useState(false)
     const isLoggedIn = useSelector(state => state.session.user !== null)
     const isFarmer = useSelector(state => state.session.user?.user_type === 'farmer')
+    const [noResults, setNoResults] = useState(false)
 
     useEffect(() => {
         dispatch(thunkLoadProducts()).then(() => setIsloaded(true))
     }, [dispatch])
 
-    // if (products.length === 0) {
-    //     <h2>Loading....</h2>
-    // }
+    useEffect(() => {
+        if (productsArr.length === 0 && isLoaded) {
+            setNoResults(true)
+        } else {
+            setNoResults(false)
+        }
+    }, [productsArr, isLoaded])
 
-    const hello = true
-
-    if (hello) {
+    if (!isLoaded) {
         return <LoadingSpinner />
     }
 
@@ -38,11 +42,11 @@ function ProductList () {
                 </div>) :
                 isFarmer ? <div className='create'><OpenModalButton buttonText='Create a new Listing' modalComponent={<ProductForm />}/></div> : ''
             }
-            <div>
-                {isLoaded && productsArr.map((product) => (
+            <SearchBar />
+            {noResults ? 'No Result' : productsArr.map((product) => (
                     <ProductCard key={product?.id} product={product} />
                 ))}
-            </div>
+
         </>
     )
 }

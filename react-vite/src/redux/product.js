@@ -47,8 +47,9 @@ const editProduct = product => {
 
 // Thunk
 
-export const thunkLoadProducts = () => async dispatch => {
-    const response = await fetch('/api/products');
+export const thunkLoadProducts = (searchQuery) => async dispatch => {
+    const queryParams = new URLSearchParams(searchQuery).toString();
+    const response = await fetch(`/api/products/search?${queryParams}`);
 
     if (response.ok) {
         const data = await response.json()

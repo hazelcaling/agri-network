@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from datetime import date, datetime
 from app.api.aws_helper  import get_unique_filename, upload_file_to_s3
 import os
+from sqlalchemy import or_
 
 product_routes = Blueprint('products', __name__)
 
@@ -117,3 +118,24 @@ def get_images_by_product(product_id):
     images = Image.query.filter(Image.product_id == product_id).all()
 
     return jsonify([image.to_dict() for image in images]), 200
+
+
+## Search products
+@product_routes.route('/search')
+def search_products():
+    """
+    Search product by product type, description
+    """
+    product = request.args.get('product_type', type=str)
+    description = request.args.get('description', type=str)
+
+    # Check if both product and description are not provided
+    if not product and not description:
+        results = db.session.query(Product).join(User).filter(User.user_type == 'farmer').all()  # Fetch all products
+    else:
+        # Perform search based on provided parameters
+        results = Product.query.filter(
+            or_(Product.product_type.ilike(f"%{product}%"), Product.description.ilike(f"%{description}%"))
+        ).all()
+
+    return jsonify([product.to_dict() for product in results]), 200
