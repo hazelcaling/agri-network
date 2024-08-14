@@ -1,0 +1,142 @@
+/* Product card container */
+.product-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid layout */
+    row-gap: 30px; /* Space between rows */
+    column-gap: 16px; /* Space between columns */
+    justify-content: center; /* Center cards horizontally */
+}
+
+/* Product card */
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    height: 100%;
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 230px;
+    max-width: 230px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Full width of the grid cell */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+    padding: 16px; /* Padding inside the card */
+    margin: 0; /* Remove default margin */
+    position: relative;
+}
+
+/* Details section styling */
+.product-card-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Allow it to take available space */
+    margin-bottom: 40px; /* Space to make room for date-posted */
+    padding-bottom: 0; /* Remove extra padding at the bottom */
+    margin-top: 40px; /* Adjust this value if needed */
+}
+
+.product-card-detail-row {
+    margin-bottom: 12px; /* Adjust spacing between rows */
+    display: flex;
+    align-items: center;
+    color: #333;
+    padding-bottom: 0; /* Ensure no extra padding */
+}
+
+/* Labels and content */
+.product-card-label {
+    font-weight: bold;
+    flex: 0 0 35%; /* Consistent width for labels */
+    margin-right: 8px; /* Space between label and content */
+    white-space: nowrap; /* Prevent labels from wrapping */
+    color: #333; /* Label color */
+}
+
+.product-card-content {
+    flex: 1; /* Allow content to grow and fill remaining space */
+    text-align: left; /* Align text to the left */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    color: #666; /* Content color */
+    word-break: break-word; /* Handle long words gracefully */
+}
+
+.product-card-content.description {
+    white-space: normal; /* Allow text to wrap */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    display: block; /* Ensure the description takes up full width */
+}
+
+.product-card-availability {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    /* background-color: #f0f0f0; */
+    padding: 4px 2px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Checkmark styling */
+.checkmark-icon {
+    color: #4caf50;
+    margin-right: 4px; /* Adjust the space between the icon and the text */
+    vertical-align: top; /* Ensure the icon aligns with the middle of the text */
+}
+
+/* Date posted styling */
+.product-card-date-posted {
+    margin-top: auto; /* Push to the bottom */
+    font-size: 0.85rem;
+    color: #aaa; /* Light color */
+    text-align: right; /* Align to the right */
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+
+
+
+
+/* Availability row styling */
+.product-card-availability .product-card-label {
+    color: #4CAF50; /* Highlight the availability label */
+}
+
+
+/* Link styling */
+.product-card-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit color from parent */
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+/* Disable hover effect */
+.product-card.no-hover:hover {
+    box-shadow: none;
+    transform: none; /* Remove hover effect */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .product-card {
+        min-height: 250px; /* Adjust minimum height for smaller screens */
+    }
+
+    .product-card-image {
+        height: 150px; /* Adjust image height for smaller screens */
+    }
+}

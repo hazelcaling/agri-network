@@ -1,0 +1,46 @@
+.delete-option {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff; /* White background */
+    color: #dc3545; /* Red text */
+    padding: 8px 16px;
+    border: 1px solid #dc3545; /* Red border */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.delete-option:hover {
+    background-color: #dc3545; /* Red background */
+    color: #fff; /* White text */
+}
+
+.edit-image {
+    margin-bottom: 30px;
+}
+
+
+.add-image-button {
+    background-color: #17a2b8; /* Teal */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.add-image-button:hover {
+    background-color: #138496;
+}
+
+.add-image-button:active {
+    background-color: #117a8b;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

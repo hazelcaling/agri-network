@@ -31,6 +31,7 @@ export const getImagesByListingId = (listing_id) => async (dispatch) => {
     if (response.ok) {
         const images = await response.json();
         dispatch(loadImages(images));
+        return images
     }
 };
 

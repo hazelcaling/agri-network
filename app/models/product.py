@@ -10,7 +10,7 @@ class Product(db.Model):
     farmer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     product_type = db.Column(db.String(10), nullable=False)
     description = db.Column(db.String(100))
-    location = db.Column(db.String(20))
+    location = db.Column(db.String(91))
     available_now = db.Column(db.Boolean, default=False)
     harvest_date = db.Column(db.Date, nullable=True)
     created_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())

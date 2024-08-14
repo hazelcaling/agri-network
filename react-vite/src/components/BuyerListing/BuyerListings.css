@@ -1,0 +1,29 @@
+.buyer-listing-page {
+    position: relative;
+}
+
+.buyer-listing-create {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+
+.buyer-listing-body {
+    margin-top: 60px;
+}
+
+
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+    }
+
+    .reset-button {
+        width: 100%;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+}

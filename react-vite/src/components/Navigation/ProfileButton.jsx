@@ -51,8 +51,7 @@ function ProfileButton() {
         <ul className={'profile-dropdown'} ref={ulRef}>
           {user ? (
             <>
-              <div className="menu-item">{user.first_name} {user.last_name}</div>
-              <div className="menu-item">{user.user_type.toUpperCase()}</div>
+              <div className="menu-item no-hover">Hello, {user.first_name} {user.last_name} / {user.user_type.toUpperCase()}</div>
               {user.user_type === 'farmer' ? (
                 <div className="menu-item">
                   <Link to='user/products' >Manage Listings</Link>

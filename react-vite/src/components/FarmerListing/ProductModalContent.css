@@ -1,0 +1,137 @@
+/* Modal Content */
+
+.product-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure modal is on top */
+}
+
+.product-modal-content {
+    width: 1200px; /* Fixed width */
+    height: 1200px; /* Fixed height */
+    max-width: 90vw; /* Ensure it doesn’t exceed viewport width */
+    max-height: 90vh; /* Ensure it doesn’t exceed viewport height */
+    /* Add scrollbars if content overflows */
+    /* overflow: auto;  */
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+}
+
+.product-modal-body {
+    margin-top: 10px;
+
+}
+
+
+
+/* Product Images */
+.product-modal-images img {
+    max-width: 100%; /* Ensure image fits within container */
+    height: 600px; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for image */
+    display: block;
+    margin: 0 auto; /* Center align the image */
+}
+
+/* newly added here*/
+
+.product-modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 80%; /* Adjust for image */
+    max-width: 800px; /* Maximum width */
+    height: auto; /* Height adjusts based on content */
+    max-height: 90vh; /* Maximum height */
+    overflow: auto;
+    position: relative;
+}
+
+/* Styles when image is present */
+.product-modal-with-image .product-modal-content {
+    width: 80%;
+    max-width: 800px;
+}
+
+
+
+/* Optional: Adjust height for no image case */
+.content-no-image {
+    max-height: 70vh; /* Adjust height */
+    max-width: 60vh;
+}
+
+
+
+
+
+
+
+
+
+.farmer-section {
+    background-color: #f9f9f9; /* Light background color for separation */
+    border: 1px solid #ddd; /* Light border for visual separation */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px;
+    margin-bottom: 15px; /* Space between paragraphs */
+}
+
+.product-modal-product,
+.product-modal-description,
+.product-modal-location,
+.product-modal-harvest-date {
+    margin-bottom: 10px;
+}
+
+.product-modal-description {
+    word-wrap: break-word; /* Break long words to fit the container */
+    overflow-wrap: break-word; /* Handle text overflow */
+    white-space: normal; /* Allow text to wrap */
+}
+
+
+.send-message-button {
+    background-color: #4CAF50; /* A soft green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.send-message-button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+/* Updated Secondary Color for Product Modal Buttons */
+.product-modal-button {
+    border: 1px solid #ddd; /* Light border for separation */
+    background-color: #ffffff; /* White background */
+    color: #4CAF50; /* Green text to match the primary color */
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.product-modal-button:hover {
+    background-color: #f2f2f2; /* Light gray background on hover */
+    color: #388e3c; /* Darker green text on hover */
+}
