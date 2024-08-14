@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: aad7e6f6bfc4
+Revision ID: 888afc2e7053
 Revises: 
-Create Date: 2024-07-08 19:26:51.932931
+Create Date: 2024-08-14 01:16:45.450316
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'aad7e6f6bfc4'
+revision = '888afc2e7053'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -35,13 +35,14 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+    # ### end Alembic commands ###qqqqqqqqq
 
     op.create_table('buyer_requests',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('buyer_id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=10), nullable=False),
-    sa.Column('description', sa.String(length=160), nullable=True),
-    sa.Column('location', sa.String(length=100), nullable=True),
+    sa.Column('description', sa.String(length=100), nullable=True),
+    sa.Column('location', sa.String(length=20), nullable=True),
     sa.Column('offer_price', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.TIMESTAMP(), nullable=True),
     sa.Column('updated_at', sa.TIMESTAMP(), nullable=True),
@@ -51,13 +52,14 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE buyer_requests SET SCHEMA {SCHEMA};")
+    # ### end Alembic commands ###qqqqqqqqq
 
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('farmer_id', sa.Integer(), nullable=False),
     sa.Column('product_type', sa.String(length=10), nullable=False),
-    sa.Column('description', sa.String(length=100), nullable=True),
-    sa.Column('location', sa.String(length=20), nullable=True),
+    sa.Column('description', sa.String(length=160), nullable=True),
+    sa.Column('location', sa.String(length=100), nullable=True),
     sa.Column('available_now', sa.Boolean(), nullable=True),
     sa.Column('harvest_date', sa.Date(), nullable=True),
     sa.Column('created_at', sa.TIMESTAMP(), nullable=True),
@@ -68,6 +70,7 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
+    # ### end Alembic commands ###qqqqqqqqq
 
     op.create_table('images',
     sa.Column('id', sa.Integer(), nullable=False),
