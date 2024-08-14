@@ -17,7 +17,12 @@ def get_all_products():
 @product_routes.route('/<int:product_id>')
 def get_product(product_id):
     data = db.session.query(Product).join(User).filter(Product.id == product_id and User.id == Product.farmer_id).all()
-    return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}'} for product in data][0])
+    imgData = db.session.query(Image).filter(Image.product_id == product_id).all()
+    image = False
+    if imgData:
+        image = imgData[0].url
+
+    return jsonify([{**product.to_dict(), 'farmer': f'{product.farmer.first_name} {product.farmer.last_name}', 'url': image} for product in data][0])
 
 
 # # (AWS S3) Upload an image for a business based on the business' id
@@ -38,7 +43,7 @@ def upload_image(product_id):
         new_image = Image(farmer_id=current_user.id, product_id=product_id, url=url)
         db.session.add(new_image)
         db.session.commit()
-        return jsonify({"message": "Image uploaded successfully", "url": url}), 200
+        return jsonify({"message": "Image uploaded successfully", "url": url, "listingId": product_id, 'id': new_image.id}), 200
 
     return jsonify({"error": "Unexpected error occurred"}), 500
 
@@ -124,18 +129,18 @@ def get_images_by_product(product_id):
 @product_routes.route('/search')
 def search_products():
     """
-    Search product by product type, description
+    Search product by product type, description.
     """
-    product = request.args.get('product_type', type=str)
-    description = request.args.get('description', type=str)
+    query_string = request.args.get('searchQuery', type=str)
 
-    # Check if both product and description are not provided
-    if not product and not description:
-        results = db.session.query(Product).join(User).filter(User.user_type == 'farmer').all()  # Fetch all products
-    else:
-        # Perform search based on provided parameters
-        results = Product.query.filter(
-            or_(Product.product_type.ilike(f"%{product}%"), Product.description.ilike(f"%{description}%"))
-        ).all()
+    query = Product.query.join(User).filter(User.user_type == 'farmer')
+
+    if query_string:
+        # Search both product_type and description using OR condition
+        query = query.filter(
+            or_(Product.product_type.ilike(f"%{query_string}%"), Product.description.ilike(f"%{query_string}%"))
+        )
+
+    results = query.all()
 
     return jsonify([product.to_dict() for product in results]), 200

@@ -109,6 +109,9 @@
 .profile-dropdown div:hover {
   background-color: #e0f7e0;
 }
+.profile-dropdown .no-hover:hover {
+  background-color: unset;
+}
 
 .profile-dropdown button {
   padding: 10px;

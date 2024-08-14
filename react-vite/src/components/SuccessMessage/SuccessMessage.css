@@ -1,0 +1,29 @@
+/* SuccessMessage.css */
+.success-message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #e0f7ea; /* Light green background */
+  }
+
+  .success-message-card {
+    text-align: center;
+    padding: 20px 40px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin-bottom: 300px;
+  }
+
+  .success-message-card h1 {
+    color: #2e7d32; /* Dark green for the header */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .success-message-card p {
+    color: #4caf50; /* Green for the paragraph text */
+    font-size: 1.25rem;
+  }
