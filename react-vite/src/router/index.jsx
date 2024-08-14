@@ -2,21 +2,22 @@ import { createBrowserRouter } from "react-router-dom"
 import Layout from "./Layout"
 import {
   ProductDetails,
-  ProductList,
   ManageProductListings,
-  CreateProductForm,
-  FarmerListings,
+  FarmerListingForm,
   UpdateProduct,
-} from "../components/Products"
+} from "../components/FarmerListing"
 import HomePage from "../components/HomePage"
-import BuyerRequestList from "../components/Buyer/AllBuyerRequests"
+
 import {
   UserBuyerRequests,
   ManageBuyerRequests,
   BuyerRequestDetails,
   EditBuyerRequest,
-} from "../components/Buyer"
+  BuyerListings
+} from "../components/BuyerListing"
 import AboutMe from "../components/AboutMe/AboutMe"
+import SearchFilterSort from "../components/SearchFilterSort/SearchFilterSort"
+import SuccessMessage from "../components/SuccessMessage/SuccessMessage"
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,9 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },      {
+        path: "success",
+        element: <SuccessMessage />,
       },
       {
         path: "/aboutme",
@@ -32,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <ProductList />,
+        element: <SearchFilterSort />,
       },
       {
         path: "products/:productId",
@@ -40,7 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "products/create",
-        element: <CreateProductForm />,
+        element: <FarmerListingForm />,
       },
       {
         path: "user/products",
@@ -55,12 +59,8 @@ export const router = createBrowserRouter([
         element: <UpdateProduct />,
       },
       {
-        path: "farmers/:farmerId/products",
-        element: <FarmerListings />,
-      },
-      {
         path: "buyer-requests",
-        element: <BuyerRequestList />,
+        element: <BuyerListings />,
       },
       {
         path: "buyer-requests/:buyerReqId",

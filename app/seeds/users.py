@@ -8,15 +8,27 @@ def seed_users():
         email='demo@aa.io', password='password', first_name='Demo', last_name='Lition', user_type='farmer')
     marnie = User(
         email='marnie@aa.io', password='password', first_name='Marnie', last_name='Barney', user_type='farmer')
+    marvin = User(
+        email='marvin@aa.io', password='password', first_name='Marvin', last_name='Malig', user_type='farmer')
+    francis = User(
+        email='francis@aa.io', password='password', first_name='Francis', last_name='Simbulan', user_type='farmer')
+    nieva = User(
+        email='nieva@aa.io', password='password', first_name='Nieva', last_name='Lampitoc', user_type='buyer')
+    emma = User(
+        email='emma@aa.io', password='password', first_name='Emma', last_name='Dayag', user_type='buyer')
+    john = User(
+        email='john@aa.io', password='password', first_name='John', last_name='Smith', user_type='buyer')
     bobbie = User(
         email='bobbie@aa.io', password='password', first_name='Bobbie', last_name='Flay', user_type='buyer')
-    marvin = User(
-        email='marvin@aa.io', password='password', first_name='Marvin', last_name='Malig', user_type='buyer')
 
     db.session.add(demo)
     db.session.add(marnie)
-    db.session.add(bobbie)
     db.session.add(marvin)
+    db.session.add(francis)
+    db.session.add(nieva)
+    db.session.add(emma)
+    db.session.add(john)
+    db.session.add(bobbie)
     db.session.commit()
 
 

@@ -8,7 +8,6 @@ const CREATE_PRODUCT = 'products/createProduct'
 const DELETE_PRODUCT = 'products/deleteProduct'
 const EDIT_PRODUCT = 'products/editProduct'
 
-
 // Actions
 const load = (products) => {
     return {
@@ -45,10 +44,13 @@ const editProduct = product => {
     }
 }
 
+
 // Thunk
 
-export const thunkLoadProducts = () => async dispatch => {
-    const response = await fetch('/api/products');
+export const thunkLoadProducts = (filters, searchQuery) => async dispatch => {
+    const queryParams = new URLSearchParams(filters, searchQuery).toString();
+
+    const response = await fetch(`/api/products/search?${queryParams}`);
 
     if (response.ok) {
         const data = await response.json()
