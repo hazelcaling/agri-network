@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteProduct from "./DeleteProduct";
 import CreateProductForm from "./FarmerListingForm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { LoadingSpinner } from "../LoadingSpinner";
 import './ManageProductListings.css'
 
@@ -16,6 +16,9 @@ function ManageProductListings () {
     const products = useSelector(state => state.products)
     const productsArr = Object.values(products).filter(product => product?.farmer_id === userId).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     const [isLoaded, setIsLoaded] = useState(false)
+
+    const location = useLocation()
+    const currentPath = location.pathname
 
     useEffect(() => {
         dispatch(thunkLoadProducts())
@@ -43,7 +46,7 @@ function ManageProductListings () {
                 ) : (
                     productsArr.map((product) => (
                         <div key={product?.id} className="listing-card">
-                            <ProductCard product={product} />
+                            <ProductCard product={product} currentPath={currentPath} />
                             <div className="edit-delete-buttons">
                                 <button
                                     className="small-buttons edit"

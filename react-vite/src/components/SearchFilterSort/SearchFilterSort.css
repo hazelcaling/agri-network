@@ -66,13 +66,48 @@
   background-color: #ff0000;
 }
 
+
 .product-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 20px; /* Space between items */
   width: 100%;
   max-width: 1000px;
-  margin-top: 10px;
+  margin: 10px auto; /* Center the container */
+}
 
 
+/* Media Queries */
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column;
+  }
+
+  .input-group input[type="text"],
+  .input-group select,
+  .input-group .select-sort select,
+  .input-group .reset-button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .product-list {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-group input[type="text"],
+  .input-group select,
+  .input-group .select-sort select,
+  .input-group .reset-button {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .product-list {
+    display: flex;
+    justify-content: center;
+  }
 }

@@ -1,12 +1,11 @@
 .manage-listing-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    gap: 20px; /* Space between items */
     width: 100%;
     max-width: 1000px;
-    margin-left: 100px;
-    margin-top: 50px;
-    justify-content: center;
+    margin: 10px auto ; /* Center the container */
+
 }
 
 
@@ -46,3 +45,20 @@
     box-shadow: 0 5px #666;
     transform: translateY(4px);
 }
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+
+    .manage-listing-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .manage-listing-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
