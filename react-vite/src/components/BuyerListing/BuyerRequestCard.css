@@ -7,20 +7,31 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
-.product-card.buyer {
-    height: 100%;
-    min-height: 380px;
-    max-height: 380px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    min-width: 250px;
-    max-width: 400px;
-    width: 100%;
-    box-sizing: border-box;
+
+.buyer-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  height: 100%;
+  min-height: 400px;
+  max-height: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Full width of the grid cell */
+  box-sizing: border-box; /* Include padding in width/height calculations */
+  padding: 16px; /* Padding inside the card */
+  margin: 0; /* Remove default margin */
+  position: relative;
+
 }
+
 
 .product-card-details.buyer {
     margin-top: 0;
@@ -47,4 +58,16 @@
 
 .send-message-button-buyer:active {
   transform: scale(1);
+}
+
+
+.buyer-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Disable hover effect */
+.buyer-card.no-hover:hover {
+  box-shadow: none;
+  transform: none; /* Remove hover effect */
 }

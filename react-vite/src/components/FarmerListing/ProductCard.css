@@ -14,10 +14,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     height: 100%;
-    min-height: 300px;
-    max-height: 300px;
-    min-width: 230px;
-    max-width: 230px;
+    min-height: 400px;
+    max-height: 400px;
+    min-width: 300px;
+    max-width: 300px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -26,6 +26,7 @@
     padding: 16px; /* Padding inside the card */
     margin: 0; /* Remove default margin */
     position: relative;
+
 }
 
 /* Details section styling */
@@ -132,9 +133,6 @@
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-    .product-card {
-        min-height: 250px; /* Adjust minimum height for smaller screens */
-    }
 
     .product-card-image {
         height: 150px; /* Adjust image height for smaller screens */

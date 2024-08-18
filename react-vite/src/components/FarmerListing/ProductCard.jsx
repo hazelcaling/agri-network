@@ -3,7 +3,7 @@ import { timeAgo, formatDate } from "../../helperFunc";
 import { useLocation } from "react-router-dom";
 import './ProductCard.css';
 
-function ProductCard({ product, openModal }) {
+function ProductCard({ product, openModal, currentPath }) {
     const location = useLocation();
     const isUserProductsPage = location.pathname === '/user/products';
 
@@ -33,6 +33,7 @@ function ProductCard({ product, openModal }) {
                             <span className="product-card-content">{!product?.available_now && formatDate(product?.harvest_date)}</span>
                         </div>
                     </div>
+                    {currentPath !== '/user/products' && <button className="send-message-button-buyer" onClick={() => alert('Feature coming soon')}>Send Message</button>}
                 <span className="product-card-date-posted">{timeAgo(product?.created_at)}</span>
             </div>
         </div>

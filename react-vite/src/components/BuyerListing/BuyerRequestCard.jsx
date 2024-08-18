@@ -6,14 +6,14 @@ function BuyerRequestCard ({ listing, openModal, currentPath }) {
     const location = useLocation();
     const isUserProductsPage = location.pathname === '/user/buyer-requests';
 
-    const cardClassName = isUserProductsPage ? 'product-card no-hover' : 'product-card';
+    const cardClassName = isUserProductsPage ? 'buyer-card no-hover' : 'buyer-card';
 
     const handleClick = () => {
         openModal(listing)
     }
 
     return (
-        <div className="product-card-container buyer-card" onClick={isUserProductsPage ? undefined : handleClick}>
+        <div className="buyer-card-container" onClick={isUserProductsPage ? undefined : handleClick}>
             <div className={`${cardClassName} buyer`}>
                 <div className="product-card-details buyer">
                     <div className="product-card-detail-row">
