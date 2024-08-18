@@ -23,7 +23,4 @@
         width: 100%;
     }
 
-    .product-list {
-        grid-template-columns: 1fr;
-    }
 }
