@@ -8,29 +8,20 @@ def seed_images():
     # buyers = db.session.query(User).filter(User.user_type == 'buyer').all()
     # buyer_listings = db.session.query(Buyer_Request).all()
 
-    onion = Image(
-        farmer_id=farmers[0].id,
-        product_id=farmer_listings[0].id,
-        url='https://agrinetwork-images.s3.us-west-1.amazonaws.com/a99cb79868f9485bb4921f77731a8570.jpg')
     onion2a = Image(
         farmer_id=farmers[1].id,
-        product_id=farmer_listings[3].id,
+        product_id=farmer_listings[0].id,
         url='https://agrinetwork-images.s3.us-west-1.amazonaws.com/48c23acdfe424e9885ef4e3e75033f39.jpg')
-    onion2b = Image(
-        farmer_id=farmers[1].id,
-        product_id=farmer_listings[3].id,
-        url='https://agrinetwork-images.s3.us-west-1.amazonaws.com/975ba5efb97848fe92631bf2d08ad7be.jpg')
     sili = Image(
         farmer_id=farmers[3].id,
-        product_id=farmer_listings[7].id,
+        product_id=farmer_listings[1].id,
         url='https://agrinetwork-images.s3.us-west-1.amazonaws.com/9ae5e25fad5d424fb3543844e27772c5.jpg')
     pinya = Image(
         farmer_id=farmers[3].id,
-        product_id=farmer_listings[8].id,
+        product_id=farmer_listings[2].id,
         url='https://agrinetwork-images.s3.us-west-1.amazonaws.com/3a15b31926c041d5abcc3f679e42aacd.jpg')
-    db.session.add(onion)
+
     db.session.add(onion2a)
-    db.session.add(onion2b)
     db.session.add(sili)
     db.session.add(pinya)
     db.session.commit()
