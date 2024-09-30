@@ -41,8 +41,6 @@ db.init_app(app)
 scheduler.init_app(app)
 Migrate(app, db)
 
-scheduler.start()
-
 # Application Security
 CORS(app)
 
@@ -113,7 +111,7 @@ def update_product_availability():
 
 # Schedule the task to run every day at midnight
 scheduler.add_job(id='update_availability_job', func=update_product_availability, trigger='cron', hour=0)
-
+scheduler.start()
 
 @app.errorhandler(404)
 def not_found(e):
