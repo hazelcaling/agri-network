@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from datetime import datetime
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -15,6 +16,7 @@ class Product(db.Model):
     harvest_date = db.Column(db.Date, nullable=True)
     created_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp())
     updated_at = db.Column(db.TIMESTAMP, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
 
     def to_dict(self):
         return {
