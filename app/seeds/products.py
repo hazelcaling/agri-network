@@ -6,7 +6,7 @@ from datetime import datetime
 def seed_products():
     users = db.session.query(User).filter(User.user_type == 'farmer').all()
     onion2 = Product(
-        farmer_id=users[1].id, product_type='Onion', description='Available 2 tons 25 per kilo. San Jose City Nueva Ecija. If interested tawag lang po kayo sa number na 0963-222-4444', location='Nueva Ecija', available_now=True)
+        farmer_id=users[1].id, product_type='Onion', description='Available 2 tons 25 per kilo. San Jose City Nueva Ecija. If interested tawag lang po kayo sa number na 0963-222-4444', location='Nueva Ecija', harvest_date=datetime.strptime('07/15/2025', '%m/%d/%Y').date(), available_now=False)
     sili = Product(
         farmer_id=users[3].id, product_type='Pepper', description='Red Sili 1300/10kgs via lalamove delivery', location='Tarlac', available_now=True)
     pinya = Product(
@@ -14,7 +14,7 @@ def seed_products():
     onion = Product(
         farmer_id=users[0].id, product_type='Onion', description='Sibuyas de uno linis at dry na pickup only 35/per kilo. If interested call 0963-000-1111.', location='Baguio', available_now=True)
     strawberry = Product(
-        farmer_id=users[0].id, product_type='Strawberry', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('08/15/2024', '%m/%d/%Y').date(), available_now=False)
+        farmer_id=users[0].id, product_type='Strawberry', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('01/15/2025', '%m/%d/%Y').date(), available_now=False)
     cabbage = Product(
         farmer_id=users[0].id, product_type='Cabbage', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('09/10/2024', '%m/%d/%Y').date(), available_now=False)
     pakwan = Product(
