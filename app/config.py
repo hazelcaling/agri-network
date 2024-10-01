@@ -13,3 +13,6 @@ class Config:
         'DATABASE_URL').replace('postgres://', 'postgresql://')
     SQLALCHEMY_ECHO = True
     SCHEDULER_API_ENABLED = True
+
+    # New configuration for enabling the scheduler in local development
+    RUN_SCHEDULER = os.environ.get('RUN_SCHEDULER', 'false').lower() == 'true'
