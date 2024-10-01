@@ -66,11 +66,11 @@ scheduler = APScheduler()
 # Schedule the product availability update task
 def update_product_availability():
     with app.app_context():
-        current_date = datetime.now().date()
+        current_datetime = datetime.now()  # Get current date and time
 
         # Update products that should be available now based on harvest date
         products_to_update = Product.query.filter(
-            Product.harvest_date <= current_date,
+            Product.harvest_date <= current_datetime.date(),  # Use .date() to compare with current date
             Product.available_now == False
         ).all()
 
@@ -86,7 +86,7 @@ def update_product_availability():
 
         # Optional: Update available_now status for future harvests that are now available
         products_to_update_future = Product.query.filter(
-            Product.harvest_date > current_date,
+            Product.harvest_date > current_datetime.date(),  # Check for future dates
             Product.available_now == True
         ).all()
 
@@ -101,8 +101,9 @@ def update_product_availability():
         logging.info(f'Updated {len(products_to_update_future)} products to not available now based on future harvest dates.')
 
 
-# Only start scheduler in production
-if os.environ.get('FLASK_ENV') == 'production':
+
+# Only start scheduler in production or if RUN_SCHEDULER is set to true
+if os.environ.get('FLASK_ENV') == 'production' or app.config['RUN_SCHEDULER']:
     scheduler.init_app(app)
     scheduler.add_job(id='update_availability_job', func=update_product_availability, trigger='cron', hour=0)
     scheduler.start()
