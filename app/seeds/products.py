@@ -16,13 +16,13 @@ def seed_products():
     strawberry = Product(
         farmer_id=users[0].id, product_type='Strawberry', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('01/15/2025', '%m/%d/%Y').date(), available_now=False)
     cabbage = Product(
-        farmer_id=users[0].id, product_type='Cabbage', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('09/10/2024', '%m/%d/%Y').date(), available_now=False)
+        farmer_id=users[0].id, product_type='Cabbage', description='Pickup only', location='Baguio', harvest_date=datetime.strptime('03/10/2025', '%m/%d/%Y').date(), available_now=False)
     pakwan = Product(
-        farmer_id=users[1].id, product_type='Watermelon', description='Pickup only', location='Nueva Ecija', harvest_date=datetime.strptime('08/20/2024', '%m/%d/%Y').date(), available_now=False)
+        farmer_id=users[1].id, product_type='Watermelon', description='Pickup only', location='Nueva Ecija', available_now=True)
     eggplant = Product(
-        farmer_id=users[2].id, product_type='Eggplant', description='Talong pickup only', location='Cavite', harvest_date=datetime.strptime('09/01/2024', '%m/%d/%Y').date(), available_now=False)
+        farmer_id=users[2].id, product_type='Eggplant', description='Talong pickup only', location='Cavite', available_now=True)
     tomato = Product(
-        farmer_id=users[2].id, product_type='Tomato', description='Kamatis premera Php300 per bag, Php270 min 5-9 bags, Php250 min 10 bags up. Pm lang po sa interesado', location='Baguio', harvest_date=datetime.strptime('08/15/2024', '%m/%d/%Y').date(), available_now=False)
+        farmer_id=users[2].id, product_type='Tomato', description='Kamatis premera Php300 per bag, Php270 min 5-9 bags, Php250 min 10 bags up. Pm lang po sa interesado', location='Baguio', available_now=True)
 
 
     db.session.add(onion2)
