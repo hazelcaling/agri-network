@@ -39,3 +39,7 @@ class User(db.Model, UserMixin):
     # Relationships
     products = db.relationship('Product', back_populates='farmer', cascade='all, delete-orphan')
     buyer_requests = db.relationship('Buyer_Request', back_populates='buyer', cascade='all, delete-orphan')
+
+    # Relationships for messaging
+    sent_messages = db.relationship('Message', foreign_keys='Message.sender_id', back_populates='sender', cascade='all, delete-orphan')
+    received_messages = db.relationship('Message', foreign_keys='Message.receiver_id', back_populates='receiver', cascade='all, delete-orphan')
